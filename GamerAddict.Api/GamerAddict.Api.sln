@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamerAddict.Domain", "..\Ga
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamerAddict.Dto", "..\GamerAddict.Dto\GamerAddict.Dto.csproj", "{C77CC35B-641A-4BB1-9692-2C8C42353057}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamerAddict.DAL", "..\GamerAddict.DAL\GamerAddict.DAL.csproj", "{C5ADBF2F-7F8E-4D7D-BA40-F939C3302E66}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{C77CC35B-641A-4BB1-9692-2C8C42353057}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C77CC35B-641A-4BB1-9692-2C8C42353057}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C77CC35B-641A-4BB1-9692-2C8C42353057}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5ADBF2F-7F8E-4D7D-BA40-F939C3302E66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5ADBF2F-7F8E-4D7D-BA40-F939C3302E66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5ADBF2F-7F8E-4D7D-BA40-F939C3302E66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5ADBF2F-7F8E-4D7D-BA40-F939C3302E66}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
