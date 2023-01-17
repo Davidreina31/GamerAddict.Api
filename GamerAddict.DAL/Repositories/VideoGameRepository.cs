@@ -1,38 +1,56 @@
 ﻿using System;
+using GamerAddict.DAL.Data;
 using GamerAddict.DAL.Interfaces.Repositories;
 using GamerAddict.Domain.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace GamerAddict.DAL.Repositories
 {
 	public class VideoGameRepository : IVideoGameRepository
 	{
-		public VideoGameRepository()
+        private readonly ApplicationDbContext _context;
+
+        public VideoGameRepository(ApplicationDbContext context)
 		{
+            _context = context;
 		}
 
-        public Task<VideoGame> Add(VideoGame ItemToAdd)
+        public async Task<VideoGame> Add(VideoGame ItemToAdd)
         {
-            throw new NotImplementedException();
+            await _context.VideoGames.AddAsync(ItemToAdd);
+            await _context.SaveChangesAsync();
+
+            return ItemToAdd;
         }
 
-        public Task<VideoGame> Delete(int id)
+        public async Task<VideoGame> Delete(int id)
         {
-            throw new NotImplementedException();
+            var item = await _context.VideoGames.FirstOrDefaultAsync(x => x.Id == id);
+            _context.VideoGames.Remove(item);
+
+            return item;
         }
 
-        public Task<IEnumerable<VideoGame>> GetAll()
+        public async Task<IEnumerable<VideoGame>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _context.VideoGames.ToListAsync();
         }
 
-        public Task<VideoGame> GetById(int id)
+        public async Task<VideoGame> GetById(int id)
         {
-            throw new NotImplementedException();
+            var item = await _context.VideoGames.FirstOrDefaultAsync(x => x.Id == id);
+            return item;
         }
 
-        public Task<VideoGame> Update(VideoGame ItemToUpdate)
+        public async Task<VideoGame> Update(VideoGame ItemToUpdate)
         {
-            throw new NotImplementedException();
+            var result = await _context.VideoGames.FirstOrDefaultAsync(item => item.Id == ItemToUpdate.Id);
+
+            result = ItemToUpdate;
+            _context.Update(result);
+            await _context.SaveChangesAsync();
+
+            return result;
         }
     }
 }

@@ -1,33 +1,45 @@
 ﻿using System;
+using GamerAddict.DAL.Data;
 using GamerAddict.DAL.Interfaces.Repositories;
 using GamerAddict.Domain.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace GamerAddict.DAL.Repositories
 {
 	public class ReportRepository : IReportRepository
 	{
-		public ReportRepository()
-		{
-		}
+        private readonly ApplicationDbContext _context;
 
-        public Task<Report> Add(Report ItemToAdd)
+        public ReportRepository(ApplicationDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task<Report> Delete(int id)
+        public async Task<Report> Add(Report ItemToAdd)
         {
-            throw new NotImplementedException();
+            await _context.Reports.AddAsync(ItemToAdd);
+            await _context.SaveChangesAsync();
+            return ItemToAdd;
         }
 
-        public Task<IEnumerable<Report>> GetAll()
+        public async Task<Report> Delete(int id)
         {
-            throw new NotImplementedException();
+            var item = await _context.Reports.FirstOrDefaultAsync(x => x.Id == id);
+            _context.Reports.Remove(item);
+            await _context.SaveChangesAsync();
+
+            return item;
         }
 
-        public Task<Report> GetById(int id)
+        public async Task<IEnumerable<Report>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _context.Reports.ToListAsync();
+        }
+
+        public async Task<Report> GetById(int id)
+        {
+            var item = await _context.Reports.FirstOrDefaultAsync(x => x.Id == id);
+            return item;
         }
 
         public Task<Report> Update(Report ItemToUpdate)

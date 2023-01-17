@@ -1,36 +1,48 @@
 ﻿using System;
 using GamerAddict.DAL.Interfaces.Repositories;
 using GamerAddict.Domain.Entity;
+using GamerAddict.DAL.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace GamerAddict.DAL.Repositories
 {
 	public class AnswerRepository : IAnswerRepository
 	{
-		public AnswerRepository()
+        private readonly ApplicationDbContext _context;
+
+        public AnswerRepository(ApplicationDbContext context)
 		{
+            _context = context;
 		}
 
-        public Task<Answer> Add(Answer ItemToAdd)
+        public async Task<Answer> Add(Answer ItemToAdd)
         {
-            throw new NotImplementedException();
+            await _context.Answers.AddAsync(ItemToAdd);
+            await _context.SaveChangesAsync();
+            return ItemToAdd;
         }
 
-        public Task<Answer> Delete(int id)
+        public async Task<Answer> Delete(int id)
         {
-            throw new NotImplementedException();
+            var item = await _context.Answers.FirstOrDefaultAsync(x => x.Id == id);
+            _context.Remove(item);
+            await _context.SaveChangesAsync();
+
+            return item;
         }
 
-        public Task<IEnumerable<Answer>> GetAll()
+        public async Task<IEnumerable<Answer>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _context.Answers.ToListAsync();
         }
 
-        public Task<Answer> GetById(int id)
+        public async Task<Answer> GetById(int id)
         {
-            throw new NotImplementedException();
+            var item = await _context.Answers.FirstOrDefaultAsync(x => x.Id == id);
+            return item;
         }
 
-        public Task<Answer> Update(Answer ItemToUpdate)
+        public async Task<Answer> Update(Answer ItemToUpdate)
         {
             throw new NotImplementedException();
         }

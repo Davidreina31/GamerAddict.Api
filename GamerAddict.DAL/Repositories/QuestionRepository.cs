@@ -1,33 +1,45 @@
 ﻿using System;
+using GamerAddict.DAL.Data;
 using GamerAddict.DAL.Interfaces.Repositories;
 using GamerAddict.Domain.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace GamerAddict.DAL.Repositories
 {
 	public class QuestionRepository : IQuestionRepository
 	{
-		public QuestionRepository()
-		{
-		}
+        private readonly ApplicationDbContext _context;
 
-        public Task<Question> Add(Question ItemToAdd)
+        public QuestionRepository(ApplicationDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task<Question> Delete(int id)
+        public async Task<Question> Add(Question ItemToAdd)
         {
-            throw new NotImplementedException();
+            await _context.Questions.AddAsync(ItemToAdd);
+            await _context.SaveChangesAsync();
+            return ItemToAdd;
         }
 
-        public Task<IEnumerable<Question>> GetAll()
+        public async Task<Question> Delete(int id)
         {
-            throw new NotImplementedException();
+            var item = await _context.Questions.FirstOrDefaultAsync(x => x.Id == id);
+            _context.Questions.Remove(item);
+            await _context.SaveChangesAsync();
+
+            return item;
         }
 
-        public Task<Question> GetById(int id)
+        public async Task<IEnumerable<Question>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _context.Questions.ToListAsync();
+        }
+
+        public async Task<Question> GetById(int id)
+        {
+            var item = await _context.Questions.FirstOrDefaultAsync(x => x.Id == id);
+            return item;
         }
 
         public Task<Question> Update(Question ItemToUpdate)
