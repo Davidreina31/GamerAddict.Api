@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>2c9233f6-4426-4c57-a4e5-a5c611682a01</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,7 +19,13 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< Updated upstream
     <ProjectReference Include="..\GamerAddict.BLL\GamerAddict.BLL.csproj" />
     <ProjectReference Include="..\GamerAddict.Dto\GamerAddict.Dto.csproj" />
+=======
+    <ProjectReference Include="..\GamerAddict.BLL\GamerAddict.BLL.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+>>>>>>> Stashed changes
   </ItemGroup>
 </Project>
