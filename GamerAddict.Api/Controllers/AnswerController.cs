@@ -35,28 +35,38 @@ namespace GamerAddict.Api.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Answer>> GetOne(int id)
+        public async Task<ActionResult<AnswerDTO>> GetOne(int id)
         {
-            return Ok(await _manager.GetById(id));
+            var result = await _manager.GetById(id);
+            var mapped = _mapper.Map<AnswerDTO>(result);
+            return Ok(mapped);
         }
 
         // POST api/values
         [HttpPost]
-        public async Task<ActionResult<Answer>> Post([FromBody]Answer answer)
+        public async Task<ActionResult<AnswerDTO>> Post([FromBody]AnswerDTO answer)
         {
-            return Ok(await _manager.Add(answer));
+            var result = await _manager.Add(_mapper.Map<Answer>(answer));
+            var mapped = _mapper.Map<AnswerDTO>(result);
+            return Ok(mapped);
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public async Task<ActionResult<AnswerDTO>> Put([FromBody]AnswerDTO answer)
         {
+            var result = await _manager.Update(_mapper.Map<Answer>(answer));
+            var mapped = _mapper.Map<AnswerDTO>(result);
+            return Ok(mapped);
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult<AnswerDTO>> Delete(int id)
         {
+            var result = await _manager.Delete(id);
+            var mapped = _mapper.Map<AnswerDTO>(result);
+            return Ok(mapped);
         }
     }
 }
