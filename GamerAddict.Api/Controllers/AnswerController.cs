@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using GamerAddict.BLL.Interfaces.Managers;
 using GamerAddict.Domain.Entity;
+using GamerAddict.Dto;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -14,17 +16,21 @@ namespace GamerAddict.Api.Controllers
     public class AnswerController : Controller
     {
         private readonly IAnswerManager _manager;
+        private readonly IMapper _mapper;
 
-        public AnswerController(IAnswerManager answerManager)
+        public AnswerController(IAnswerManager answerManager, IMapper mapper)
         {
             _manager = answerManager;
+            _mapper = mapper;
         }
 
         // GET: api/values
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Answer>>> Get()
+        public async Task<ActionResult<IEnumerable<AnswerDTO>>> Get()
         {
-            return Ok(await _manager.GetAll());
+            var result = await _manager.GetAll();
+            var mapped = _mapper.Map<AnswerDTO>(result);
+            return Ok(mapped);
         }
 
         // GET api/values/5
