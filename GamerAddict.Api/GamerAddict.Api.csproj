@@ -30,5 +30,8 @@
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
     <ProjectReference Include="..\GamerAddict.Dto\GamerAddict.Dto.csproj" />
+    <ProjectReference Include="..\GamerAddict.Domain\GamerAddict.Domain.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
 </Project>

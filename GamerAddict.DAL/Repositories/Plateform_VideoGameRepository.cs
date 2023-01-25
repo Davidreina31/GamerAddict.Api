@@ -1,33 +1,45 @@
 ﻿using System;
+using GamerAddict.DAL.Data;
 using GamerAddict.DAL.Interfaces.Repositories;
 using GamerAddict.Domain.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace GamerAddict.DAL.Repositories
 {
 	public class Plateform_VideoGameRepository : IPlateform_VideoGameRepository
 	{
-		public Plateform_VideoGameRepository()
-		{
-		}
+        private readonly ApplicationDbContext _context;
 
-        public Task<Plateform_VideoGame> Add(Plateform_VideoGame ItemToAdd)
+        public Plateform_VideoGameRepository(ApplicationDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task<Plateform_VideoGame> Delete(int id)
+        public async Task<Plateform_VideoGame> Add(Plateform_VideoGame ItemToAdd)
         {
-            throw new NotImplementedException();
+            await _context.Plateform_VideoGames.AddAsync(ItemToAdd);
+            await _context.SaveChangesAsync();
+            return ItemToAdd;
         }
 
-        public Task<IEnumerable<Plateform_VideoGame>> GetAll()
+        public async Task<Plateform_VideoGame> Delete(int id)
         {
-            throw new NotImplementedException();
+            var item = await _context.Plateform_VideoGames.FirstOrDefaultAsync(x => x.Id == id);
+            _context.Remove(item);
+            await _context.SaveChangesAsync();
+
+            return item;
         }
 
-        public Task<Plateform_VideoGame> GetById(int id)
+        public async Task<IEnumerable<Plateform_VideoGame>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _context.Plateform_VideoGames.ToListAsync();
+        }
+
+        public async Task<Plateform_VideoGame> GetById(int id)
+        {
+            var item = await _context.Plateform_VideoGames.FirstOrDefaultAsync(x => x.Id == id);
+            return item;
         }
 
         public Task<Plateform_VideoGame> Update(Plateform_VideoGame ItemToUpdate)

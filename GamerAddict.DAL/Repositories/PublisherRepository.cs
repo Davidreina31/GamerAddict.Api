@@ -1,33 +1,45 @@
 ﻿using System;
+using GamerAddict.DAL.Data;
 using GamerAddict.DAL.Interfaces.Repositories;
 using GamerAddict.Domain.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace GamerAddict.DAL.Repositories
 {
 	public class PublisherRepository : IPublisherRepository
 	{
-		public PublisherRepository()
-		{
-		}
+        private readonly ApplicationDbContext _context;
 
-        public Task<Publisher> Add(Publisher ItemToAdd)
+        public PublisherRepository(ApplicationDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task<Publisher> Delete(int id)
+        public async Task<Publisher> Add(Publisher ItemToAdd)
         {
-            throw new NotImplementedException();
+            await _context.Publishers.AddAsync(ItemToAdd);
+            await _context.SaveChangesAsync();
+            return ItemToAdd;
         }
 
-        public Task<IEnumerable<Publisher>> GetAll()
+        public async Task<Publisher> Delete(int id)
         {
-            throw new NotImplementedException();
+            var item = await _context.Publishers.FirstOrDefaultAsync(x => x.Id == id);
+            _context.Publishers.Remove(item);
+            await _context.SaveChangesAsync();
+
+            return item;
         }
 
-        public Task<Publisher> GetById(int id)
+        public async Task<IEnumerable<Publisher>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _context.Publishers.ToListAsync();
+        }
+
+        public async Task<Publisher> GetById(int id)
+        {
+            var item = await _context.Publishers.FirstOrDefaultAsync(x => x.Id == id);
+            return item;
         }
 
         public Task<Publisher> Update(Publisher ItemToUpdate)

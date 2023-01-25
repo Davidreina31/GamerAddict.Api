@@ -1,38 +1,56 @@
 ﻿using System;
+using GamerAddict.DAL.Data;
 using GamerAddict.DAL.Interfaces.Repositories;
 using GamerAddict.Domain.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace GamerAddict.DAL.Repositories
 {
 	public class UserRepository : IUserRepository
 	{
-		public UserRepository()
-		{
-		}
+        private readonly ApplicationDbContext _context;
 
-        public Task<User> Add(User ItemToAdd)
+        public UserRepository(ApplicationDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task<User> Delete(int id)
+        public async Task<User> Add(User ItemToAdd)
         {
-            throw new NotImplementedException();
+            await _context.Users.AddAsync(ItemToAdd);
+            await _context.SaveChangesAsync();
+
+            return ItemToAdd;
         }
 
-        public Task<IEnumerable<User>> GetAll()
+        public async Task<User> Delete(int id)
         {
-            throw new NotImplementedException();
+            var item = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
+            _context.Users.Remove(item);
+
+            return item;
         }
 
-        public Task<User> GetById(int id)
+        public async Task<IEnumerable<User>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _context.Users.ToListAsync();
         }
 
-        public Task<User> Update(User ItemToUpdate)
+        public async Task<User> GetById(int id)
         {
-            throw new NotImplementedException();
+            var item = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
+            return item;
+        }
+
+        public async Task<User> Update(User ItemToUpdate)
+        {
+            var result = await _context.Users.FirstOrDefaultAsync(item => item.Id == ItemToUpdate.Id);
+
+            result = ItemToUpdate;
+            _context.Update(result);
+            await _context.SaveChangesAsync();
+
+            return result;
         }
     }
 }

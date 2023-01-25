@@ -1,33 +1,45 @@
 ﻿using System;
+using GamerAddict.DAL.Data;
 using GamerAddict.DAL.Interfaces.Repositories;
 using GamerAddict.Domain.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace GamerAddict.DAL.Repositories
 {
 	public class DeveloperRepository : IDeveloperRepository
 	{
-		public DeveloperRepository()
-		{
-		}
+        private readonly ApplicationDbContext _context;
 
-        public Task<Developer> Add(Developer ItemToAdd)
+        public DeveloperRepository(ApplicationDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task<Developer> Delete(int id)
+        public async Task<Developer> Add(Developer ItemToAdd)
         {
-            throw new NotImplementedException();
+            await _context.Developers.AddAsync(ItemToAdd);
+            await _context.SaveChangesAsync();
+            return ItemToAdd;
         }
 
-        public Task<IEnumerable<Developer>> GetAll()
+        public async Task<Developer> Delete(int id)
         {
-            throw new NotImplementedException();
+            var item = await _context.Developers.FirstOrDefaultAsync(x => x.Id == id);
+            _context.Remove(item);
+            await _context.SaveChangesAsync();
+
+            return item;
         }
 
-        public Task<Developer> GetById(int id)
+        public async Task<IEnumerable<Developer>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _context.Developers.ToListAsync();
+        }
+
+        public async Task<Developer> GetById(int id)
+        {
+            var item = await _context.Developers.FirstOrDefaultAsync(x => x.Id == id);
+            return item;
         }
 
         public Task<Developer> Update(Developer ItemToUpdate)
