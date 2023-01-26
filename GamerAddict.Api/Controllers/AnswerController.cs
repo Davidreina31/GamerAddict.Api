@@ -25,12 +25,28 @@ namespace GamerAddict.Api.Controllers
         }
 
         // GET: api/values
+        //public ActionResult<IEnumerable<PersonDTO>> Get()
+        //{
+        //    Person p = new Person();
+        //    p.FirstName = "Jean";
+        //    p.LastName = "Mouloud";
+        //    p.Id = 1;
+
+        //    Person pp = new Person();
+        //    pp.FirstName = "Jeanne";
+        //    pp.LastName = "Mouloude";
+        //    pp.Id = 2;
+        //    List<Person> list = new List<Person>();
+        //    list.Add(p);
+        //    list.Add(pp);
+
+        //    return Ok(list.Select(p => _mapper.Map<PersonDTO>(p)));
+        //}
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AnswerDTO>>> Get()
         {
             var result = await _manager.GetAll();
-            var mapped = _mapper.Map<AnswerDTO>(result);
-            return Ok(mapped);
+            return Ok(result.Select(x => _mapper.Map<AnswerDTO>(x)));
         }
 
         // GET api/values/5

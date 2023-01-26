@@ -25,8 +25,8 @@ namespace GamerAddict.Api.Controllers
         public async Task<ActionResult<IEnumerable<CommentDTO>>> Get()
         {
             var result = await _manager.GetAll();
-            var mapped = _mapper.Map<CommentDTO>(result);
-            return Ok(mapped);
+            return Ok(result.Select(x => _mapper.Map<CommentDTO>(x)));
+
         }
 
         // GET api/values/5

@@ -27,8 +27,7 @@ namespace GamerAddict.Api.Controllers
         public async Task<ActionResult<IEnumerable<CityDTO>>> Get()
         {
             var result = await _manager.GetAll();
-            var mapped = _mapper.Map<CityDTO>(result);
-            return Ok(mapped);
+            return Ok(result.Select(x => _mapper.Map<CityDTO>(x)));
         }
 
         // GET api/<CityController>/5

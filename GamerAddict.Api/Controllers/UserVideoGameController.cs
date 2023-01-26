@@ -25,8 +25,7 @@ namespace GamerAddict.Api.Controllers
         public async Task<ActionResult<User_VideoGameDTO>> GetOne(int id)
         {
             var result = await _manager.GetAll(id);
-            var mapped = _mapper.Map<User_VideoGameDTO>(result);
-            return Ok(mapped);
+            return Ok(result.Select(x => _mapper.Map<User_VideoGameDTO>(x)));
         }
 
         // POST api/<CityController>

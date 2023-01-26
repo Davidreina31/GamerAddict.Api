@@ -1,4 +1,5 @@
-﻿using GamerAddict.Api.MapperProfiles;
+﻿using AutoMapper;
+using GamerAddict.Api.MapperProfiles;
 using GamerAddict.BLL.Interfaces.Managers;
 using GamerAddict.BLL.Manager;
 using GamerAddict.DAL.Data;
@@ -15,7 +16,7 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
 
-builder.Services.AddAutoMapper(typeof(MapperProfiles)); //TODO
+builder.Services.AddAutoMapper(typeof(MapperProfiles).Assembly);
 
 builder.Services.AddScoped<IAnswerRepository, AnswerRepository>();
 builder.Services.AddScoped<IAnswerManager, AnswerManager>();
