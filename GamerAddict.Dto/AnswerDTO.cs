@@ -14,12 +14,12 @@ namespace GamerAddict.Dto
         [ForeignKey("User")]
         public int UserId { get; set; }
 
-        public UserDTO User { get; set; }
+        public UserDTO? User { get; set; }
 
         [ForeignKey("Question")]
         public int QuestionId { get; set; }
 
-        public QuestionDTO Question { get; set; }
+        public QuestionDTO? Question { get; set; }
     }
 }
 

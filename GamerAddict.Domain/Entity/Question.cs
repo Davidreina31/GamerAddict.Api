@@ -20,6 +20,8 @@ namespace GamerAddict.Domain.Entity
         public int VideoGameId { get; set; }
 
         public VideoGame VideoGame { get; set; }
+
+        public ICollection<Answer> Answers { get; set; }
     }
 }
 

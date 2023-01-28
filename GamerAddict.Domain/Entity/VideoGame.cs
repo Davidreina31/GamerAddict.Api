@@ -30,6 +30,7 @@ namespace GamerAddict.Domain.Entity
         public ICollection<Plateform_VideoGame> PlateformVideoGame { get; set; }
 
         public ICollection<Comment> Comments { get; set; }
+        public ICollection<Question> Questions { get; set; }
     }
 }
 

@@ -7,7 +7,7 @@ namespace GamerAddict.Dto
 
         public string PlateformName { get; set; }
 
-        public ICollection<Plateform_VideoGameDTO> PlateformVideoGame { get; set; }
+        public ICollection<Plateform_VideoGameDTO>? PlateformVideoGame { get; set; }
     }
 }
 

@@ -12,9 +12,9 @@ namespace GamerAddict.Dto
         [ForeignKey("City")]
         public int CityId { get; set; }
 
-        public CityDTO City { get; set; }
+        public CityDTO? City { get; set; }
 
-        public ICollection<VideoGameDTO> VideoGames { get; set; }
+        public ICollection<VideoGameDTO>? VideoGames { get; set; }
     }
 }
 

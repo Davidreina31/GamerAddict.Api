@@ -16,10 +16,10 @@ namespace GamerAddict.DAL.Data
 
 		protected override void OnConfiguring(DbContextOptionsBuilder options)
 		{
-            //options.UseSqlServer("Data Source=(localdb)\\Local;Initial Catalog=GamerAddict;Integrated Security=True;" +
-            //             "Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-            options.UseSqlServer("Server=localhost;Database=GamerAddict;User Id=SA;Password=P@ssword1;");
-		}
+            options.UseSqlServer("Data Source=(localdb)\\Local;Initial Catalog=GamerAddict;Integrated Security=True;" +
+                         "Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            //options.UseSqlServer("Server=localhost;Database=GamerAddict;User Id=SA;Password=P@ssword1;");
+        }
 
         public DbSet<Answer> Answers { get; set; }
         public DbSet<City> Cities { get; set; }

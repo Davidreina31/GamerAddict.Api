@@ -15,7 +15,7 @@ namespace GamerAddict.Dto
 
         public string Sub { get; set; }
 
-        public ICollection<User_VideoGameDTO> UserVideoGame { get; set; }
+        public ICollection<User_VideoGameDTO>? UserVideoGame { get; set; }
     }
 }
 

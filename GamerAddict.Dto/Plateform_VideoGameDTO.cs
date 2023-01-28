@@ -10,12 +10,12 @@ namespace GamerAddict.Dto
         [ForeignKey("Plateform")]
         public int PlateformId { get; set; }
 
-        public PlateformDTO Plateform { get; set; }
+        public PlateformDTO? Plateform { get; set; }
 
         [ForeignKey("VideoGame")]
         public int VideoGameId { get; set; }
 
-        public VideoGameDTO VideoGame { get; set; }
+        public VideoGameDTO? VideoGame { get; set; }
     }
 }
 

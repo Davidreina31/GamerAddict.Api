@@ -33,12 +33,16 @@ namespace GamerAddict.DAL.Repositories
 
         public async Task<IEnumerable<VideoGame>> GetAll()
         {
-            return await _context.VideoGames.ToListAsync();
+            return await _context.VideoGames.Include(x => x.Comments).Include(x => x.Publisher)
+                .Include(x => x.Developer).Include(x => x.Questions)
+                .Include(x => x.PlateformVideoGame).ThenInclude(x => x.Plateform)
+                .ToListAsync();
         }
 
         public async Task<VideoGame> GetById(int id)
         {
-            var item = await _context.VideoGames.FirstOrDefaultAsync(x => x.Id == id);
+            var item = await _context.VideoGames.Include(x => x.Comments).Include(x => x.Publisher)
+                .Include(x => x.Developer).Include(x => x.PlateformVideoGame).ThenInclude(x => x.Plateform).FirstOrDefaultAsync(x => x.Id == id);
             return item;
         }
 

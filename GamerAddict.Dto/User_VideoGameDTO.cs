@@ -10,12 +10,12 @@ namespace GamerAddict.Dto
         [ForeignKey("User")]
         public int UserId { get; set; }
 
-        public UserDTO User { get; set; }
+        public UserDTO? User { get; set; }
 
         [ForeignKey("VideoGame")]
         public int VideoGameId { get; set; }
 
-        public VideoGameDTO VideoGame { get; set; }
+        public VideoGameDTO? VideoGame { get; set; }
     }
 }
 

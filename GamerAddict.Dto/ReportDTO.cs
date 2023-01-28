@@ -14,12 +14,12 @@ namespace GamerAddict.Dto
         [ForeignKey("Comment")]
         public int CommentId { get; set; }
 
-        public CommentDTO Comment { get; set; }
+        public CommentDTO? Comment { get; set; }
 
         [ForeignKey("User")]
         public int ReporterUserId { get; set; }
 
-        public UserDTO User { get; set; }
+        public UserDTO? User { get; set; }
     }
 }
 
