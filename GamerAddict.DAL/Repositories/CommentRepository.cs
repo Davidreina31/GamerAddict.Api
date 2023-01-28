@@ -33,12 +33,12 @@ namespace GamerAddict.DAL.Repositories
 
         public async Task<IEnumerable<Comment>> GetAll()
         {
-            return await _context.Comments.ToListAsync();
+            return await _context.Comments.Include(x => x.User).ToListAsync();
         }
 
         public async Task<Comment> GetById(int id)
         {
-            var item = await _context.Comments.FirstOrDefaultAsync(x => x.Id == id);
+            var item = await _context.Comments.Include(x => x.User).FirstOrDefaultAsync(x => x.Id == id);
             return item;
         }
 

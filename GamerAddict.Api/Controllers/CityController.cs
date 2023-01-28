@@ -2,6 +2,7 @@
 using GamerAddict.BLL.Interfaces.Managers;
 using GamerAddict.Domain.Entity;
 using GamerAddict.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -41,6 +42,7 @@ namespace GamerAddict.Api.Controllers
 
         // POST api/<CityController>
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<CityDTO>> Post([FromBody] CityDTO city)
         {
             var result = await _manager.Add(_mapper.Map<City>(city));
@@ -50,6 +52,7 @@ namespace GamerAddict.Api.Controllers
 
         // PUT api/<CityController>/5
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<ActionResult<CityDTO>> Put([FromBody] CityDTO city)
         {
             var result = await _manager.Update(_mapper.Map<City>(city));
@@ -59,6 +62,7 @@ namespace GamerAddict.Api.Controllers
 
         // DELETE api/<CityController>/5
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<ActionResult<CityDTO>> Delete(int id)
         {
             var result = await _manager.Delete(id);

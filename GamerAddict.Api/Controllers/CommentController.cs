@@ -2,6 +2,7 @@
 using GamerAddict.BLL.Interfaces.Managers;
 using GamerAddict.Domain.Entity;
 using GamerAddict.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -40,6 +41,7 @@ namespace GamerAddict.Api.Controllers
 
         // POST api/values
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<CommentDTO>> Post([FromBody] CommentDTO commentDTO)
         {
             var result = await _manager.Add(_mapper.Map<Comment>(commentDTO));
@@ -49,6 +51,7 @@ namespace GamerAddict.Api.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<ActionResult<CommentDTO>> Put([FromBody] CommentDTO commentDTO)
         {
             var result = await _manager.Update(_mapper.Map<Comment>(commentDTO));
@@ -58,6 +61,7 @@ namespace GamerAddict.Api.Controllers
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<ActionResult<CommentDTO>> Delete(int id)
         {
             var result = await _manager.Delete(id);

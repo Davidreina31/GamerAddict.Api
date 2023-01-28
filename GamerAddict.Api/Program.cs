@@ -2,9 +2,12 @@
 using GamerAddict.Api.MapperProfiles;
 using GamerAddict.BLL.Interfaces.Managers;
 using GamerAddict.BLL.Manager;
+using GamerAddict.BLL.Security;
 using GamerAddict.DAL.Data;
 using GamerAddict.DAL.Interfaces.Repositories;
 using GamerAddict.DAL.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +23,24 @@ builder.Services.AddControllersWithViews()
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
+
+var domain = "https://dev-c4fngek5.us.auth0.com/";
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.Authority = domain;
+    options.Audience = "http://localhost:5081";
+});
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("read: comments", policy => policy.Requirements.Add(new HasScopeRequirement("delete:comment", domain)));
+});
+
+builder.Services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
 
 builder.Services.AddAutoMapper(typeof(MapperProfiles).Assembly);
 
@@ -63,6 +84,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -2,6 +2,7 @@
 using GamerAddict.BLL.Interfaces.Managers;
 using GamerAddict.Domain.Entity;
 using GamerAddict.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -40,6 +41,8 @@ namespace GamerAddict.Api.Controllers
 
         // POST api/<CityController>
         [HttpPost]
+        [Authorize]
+
         public async Task<ActionResult<Plateform_VideoGameDTO>> Post([FromBody] Plateform_VideoGameDTO plateform_VideoGame)
         {
             var result = await _manager.Add(_mapper.Map<Plateform_VideoGame>(plateform_VideoGame));
@@ -49,6 +52,8 @@ namespace GamerAddict.Api.Controllers
 
         // PUT api/<CityController>/5
         [HttpPut("{id}")]
+        [Authorize]
+
         public async Task<ActionResult<Plateform_VideoGameDTO>> Put([FromBody] Plateform_VideoGameDTO plateform_VideoGame)
         {
             var result = await _manager.Update(_mapper.Map<Plateform_VideoGame>(plateform_VideoGame));
@@ -58,6 +63,8 @@ namespace GamerAddict.Api.Controllers
 
         // DELETE api/<CityController>/5
         [HttpDelete("{id}")]
+        [Authorize]
+
         public async Task<ActionResult<Plateform_VideoGameDTO>> Delete(int id)
         {
             var result = await _manager.Delete(id);
