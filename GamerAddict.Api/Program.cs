@@ -40,6 +40,8 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("read: comments", policy => policy.Requirements.Add(new HasScopeRequirement("delete:comment", domain)));
 });
 
+builder.Services.AddCors();
+
 builder.Services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
 
 builder.Services.AddAutoMapper(typeof(MapperProfiles).Assembly);
@@ -86,6 +88,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 app.MapControllers();
 
