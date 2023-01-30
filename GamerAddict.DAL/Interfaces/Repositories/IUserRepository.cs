@@ -5,6 +5,8 @@ namespace GamerAddict.DAL.Interfaces.Repositories
 {
 	public interface IUserRepository : IBaseRepository<User>
 	{
-	}
+        Task<User> GetUserBySub(string sub);
+
+    }
 }
 

@@ -39,6 +39,12 @@ namespace GamerAddict.Api.Controllers
             return Ok(mapped);
         }
 
+        [HttpGet("sub/{sub}")]
+        public async Task<ActionResult<User>> GetBySub(string sub)
+        {
+            return Ok(await _manager.GetUserBySub(sub));
+        }
+
         // POST api/<CityController>
         [HttpPost]
         public async Task<ActionResult<UserDTO>> Post([FromBody] UserDTO user)

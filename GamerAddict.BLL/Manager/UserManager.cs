@@ -34,6 +34,11 @@ namespace GamerAddict.BLL.Manager
             return await _repo.GetById(id);
         }
 
+        public async Task<User> GetUserBySub(string sub)
+        {
+            return await _repo.GetUserBySub(sub);
+        }
+
         public async Task<User> Update(User ItemToUpdate)
         {
             return await _repo.Update(ItemToUpdate);

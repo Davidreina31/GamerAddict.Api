@@ -17,6 +17,15 @@ namespace GamerAddict.DAL.Repositories
 
         public async Task<User> Add(User ItemToAdd)
         {
+            var allUsers = await GetAll();
+
+            foreach (var item in allUsers)
+            {
+                if (item.Sub == ItemToAdd.Sub)
+                {
+                    throw new Exception("User already in DB");
+                }
+            }
             await _context.Users.AddAsync(ItemToAdd);
             await _context.SaveChangesAsync();
 
@@ -40,6 +49,13 @@ namespace GamerAddict.DAL.Repositories
         {
             var item = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
             return item;
+        }
+
+        public async Task<User> GetUserBySub(string sub)
+        {
+            var result = await _context.Users.FirstOrDefaultAsync(item => item.Sub == sub);
+
+            return result;
         }
 
         public async Task<User> Update(User ItemToUpdate)

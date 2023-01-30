@@ -5,6 +5,7 @@ namespace GamerAddict.BLL.Interfaces.Managers
 {
 	public interface IUserManager : IBaseManager<User>
 	{
-	}
+        Task<User> GetUserBySub(string sub);
+    }
 }
 
