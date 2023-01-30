@@ -41,7 +41,7 @@ namespace GamerAddict.Api.Controllers
         }
 
         // DELETE api/<CityController>/5
-        [HttpDelete("{id}")]
+        [HttpDelete]
         [Authorize]
 
         public async Task<ActionResult<User_VideoGameDTO>> Delete(int userId, int videoGameId)
