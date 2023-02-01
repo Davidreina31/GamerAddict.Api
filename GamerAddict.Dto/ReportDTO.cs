@@ -19,7 +19,7 @@ namespace GamerAddict.Dto
         [ForeignKey("User")]
         public int ReporterUserId { get; set; }
 
-        public UserDTO? User { get; set; }
+        public UserDTO? ReporterUser { get; set; }
     }
 }
 

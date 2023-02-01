@@ -19,7 +19,7 @@ namespace GamerAddict.Domain.Entity
         [ForeignKey("User")]
         public int ReporterUserId { get; set; }
 
-        public User User { get; set; }
+        public User ReporterUser { get; set; }
     }
 }
 

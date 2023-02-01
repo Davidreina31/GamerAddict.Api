@@ -33,7 +33,8 @@ namespace GamerAddict.DAL.Repositories
 
         public async Task<IEnumerable<Report>> GetAll()
         {
-            return await _context.Reports.ToListAsync();
+            return await _context.Reports.Include(x => x.ReporterUser).Include(x => x.Comment).ThenInclude(x => x.User)
+                .Include(x => x.Comment).ThenInclude(x => x.VideoGame).ToListAsync();
         }
 
         public async Task<Report> GetById(int id)
