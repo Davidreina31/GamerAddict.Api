@@ -16,6 +16,15 @@ namespace GamerAddict.BLL.Manager
 
         public async Task<User> Add(User ItemToAdd)
         {
+            var allUsers = await GetAll();
+
+            foreach (var item in allUsers)
+            {
+                if (item.Sub == ItemToAdd.Sub)
+                {
+                    throw new Exception("User already in DB");
+                }
+            }
             return await _repo.Add(ItemToAdd);
         }
 

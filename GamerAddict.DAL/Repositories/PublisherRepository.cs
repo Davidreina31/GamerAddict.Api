@@ -42,6 +42,12 @@ namespace GamerAddict.DAL.Repositories
             return item;
         }
 
+        public async Task<Publisher> GetPublisherByName(string name)
+        {
+            var item = await _context.Publishers.FirstOrDefaultAsync(x => x.Name == name);
+            return item;
+        }
+
         public Task<Publisher> Update(Publisher ItemToUpdate)
         {
             throw new NotImplementedException();

@@ -32,10 +32,10 @@ namespace GamerAddict.Api.Controllers
         }
 
         // GET api/<CityController>/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<DeveloperDTO>> GetOne(int id)
+        [HttpGet("{name}")]
+        public async Task<ActionResult<DeveloperDTO>> GetOne(string name)
         {
-            var result = await _manager.GetById(id);
+            var result = await _manager.GetDeveloperByName(name);
             var mapped = _mapper.Map<DeveloperDTO>(result);
             return Ok(mapped);
         }

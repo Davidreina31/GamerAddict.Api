@@ -5,6 +5,7 @@ namespace GamerAddict.BLL.Interfaces.Managers
 {
 	public interface IDeveloperManager : IBaseManager<Developer>
 	{
+		Task<Developer> GetDeveloperByName(string name);
 	}
 }
 

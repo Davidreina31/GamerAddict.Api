@@ -8,14 +8,19 @@ namespace GamerAddict.BLL.Manager
 	public class VideoGameManager : IVideoGameManager
 	{
         private readonly IVideoGameRepository _repo;
+        private readonly IDeveloperRepository _devRepo;
+        private readonly IPublisherRepository _publisherRepo;
 
-		public VideoGameManager(IVideoGameRepository repository)
+        public VideoGameManager(IVideoGameRepository repository, IDeveloperRepository developerRepository, IPublisherRepository publisherRepository)
 		{
             _repo = repository;
+            _devRepo = developerRepository;
+            _publisherRepo = publisherRepository;
 		}
 
         public async Task<VideoGame> Add(VideoGame ItemToAdd)
         {
+            //var developer = await _devRepo.
             return await _repo.Add(ItemToAdd);
         }
 

@@ -33,7 +33,12 @@ namespace GamerAddict.DAL.Repositories
 
         public async Task<IEnumerable<Plateform_VideoGame>> GetAll()
         {
-            return await _context.Plateform_VideoGames.ToListAsync();
+            throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<Plateform_VideoGame>> GetAllForVideoGameId(int id)
+        {
+            return await _context.Plateform_VideoGames.Where(x => x.VideoGameId == id).ToListAsync();
         }
 
         public async Task<Plateform_VideoGame> GetById(int id)

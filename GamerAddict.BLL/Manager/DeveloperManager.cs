@@ -16,6 +16,11 @@ namespace GamerAddict.BLL.Manager
 
         public async Task<Developer> Add(Developer ItemToAdd)
         {
+            var res = await GetDeveloperByName(ItemToAdd.Name.ToLower());
+            if (res != null)
+            {
+                throw new Exception("Developer already in db");
+            }
             return await _repo.Add(ItemToAdd);
         }
 
@@ -32,6 +37,11 @@ namespace GamerAddict.BLL.Manager
         public async Task<Developer> GetById(int id)
         {
             return await _repo.GetById(id);
+        }
+
+        public async Task<Developer> GetDeveloperByName(string name)
+        {
+            return await _repo.GetDeveloperByName(name);
         }
 
         public async Task<Developer> Update(Developer ItemToUpdate)

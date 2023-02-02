@@ -16,6 +16,11 @@ namespace GamerAddict.BLL.Manager
 
         public async Task<Publisher> Add(Publisher ItemToAdd)
         {
+            var res = await GetPublisherByName(ItemToAdd.Name.ToLower());
+            if (res != null)
+            {
+                throw new Exception("Publisher already in db");
+            }
             return await _repo.Add(ItemToAdd);
         }
 
@@ -32,6 +37,11 @@ namespace GamerAddict.BLL.Manager
         public async Task<Publisher> GetById(int id)
         {
             return await _repo.GetById(id);
+        }
+
+        public async Task<Publisher> GetPublisherByName(string name)
+        {
+            return await _repo.GetPublisherByName(name);
         }
 
         public async Task<Publisher> Update(Publisher ItemToUpdate)

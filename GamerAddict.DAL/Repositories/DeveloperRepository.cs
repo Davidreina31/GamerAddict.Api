@@ -42,6 +42,12 @@ namespace GamerAddict.DAL.Repositories
             return item;
         }
 
+        public async Task<Developer> GetDeveloperByName(string name)
+        {
+            var item = await _context.Developers.FirstOrDefaultAsync(x => x.Name.ToLower() == name.ToLower());
+            return item;
+        }
+
         public Task<Developer> Update(Developer ItemToUpdate)
         {
             throw new NotImplementedException();
