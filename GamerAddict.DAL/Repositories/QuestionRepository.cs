@@ -38,7 +38,7 @@ namespace GamerAddict.DAL.Repositories
 
         public async Task<IEnumerable<Question>> GetAllForOneVideoGame(int id)
         {
-            return await _context.Questions.Include(x => x.Answers).Include(x => x.User).Where(x => x.VideoGameId == id).ToListAsync();
+            return await _context.Questions.Include(x => x.Answers).ThenInclude(x => x.User).Include(x => x.User).Where(x => x.VideoGameId == id).ToListAsync();
         }
 
         public async Task<Question> GetById(int id)

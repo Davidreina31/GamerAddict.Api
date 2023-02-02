@@ -33,7 +33,7 @@ namespace GamerAddict.DAL.Repositories
 
         public async Task<IEnumerable<Answer>> GetAll()
         {
-            return await _context.Answers.ToListAsync();
+            return await _context.Answers.Include(x => x.User).ToListAsync();
         }
 
         public async Task<Answer> GetById(int id)
