@@ -42,7 +42,7 @@ namespace GamerAddict.DAL.Repositories
         public async Task<VideoGame> GetById(int id)
         {
             var item = await _context.VideoGames.Include(x => x.Comments).Include(x => x.Publisher)
-                .Include(x => x.Developer).Include(x => x.PlateformVideoGame).ThenInclude(x => x.Plateform).FirstOrDefaultAsync(x => x.Id == id);
+                .Include(x => x.Developer).Include(x => x.Questions).ThenInclude(x => x.Answers).Include(x => x.PlateformVideoGame).ThenInclude(x => x.Plateform).FirstOrDefaultAsync(x => x.Id == id);
             return item;
         }
 

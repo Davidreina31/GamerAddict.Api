@@ -26,7 +26,12 @@ namespace GamerAddict.BLL.Manager
 
         public async Task<IEnumerable<Question>> GetAll()
         {
-            return await _repo.GetAll();
+            throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<Question>> GetAllForOneVideoGame(int id)
+        {
+            return await _repo.GetAllForOneVideoGame(id);
         }
 
         public async Task<Question> GetById(int id)

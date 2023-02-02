@@ -32,11 +32,10 @@ namespace GamerAddict.Api.Controllers
 
         // GET api/<CityController>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<QuestionDTO>> GetOne(int id)
+        public async Task<ActionResult<IEnumerable<QuestionDTO>>> GetAllForVideoGame(int id)
         {
-            var result = await _manager.GetById(id);
-            var mapped = _mapper.Map<QuestionDTO>(result);
-            return Ok(mapped);
+            var result = await _manager.GetAllForOneVideoGame(id);
+            return Ok(result.Select(x => _mapper.Map<QuestionDTO>(x)));
         }
 
         // POST api/<CityController>
