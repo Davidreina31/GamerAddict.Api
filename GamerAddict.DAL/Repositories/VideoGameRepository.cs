@@ -27,7 +27,7 @@ namespace GamerAddict.DAL.Repositories
         {
             var item = await _context.VideoGames.FirstOrDefaultAsync(x => x.Id == id);
             _context.VideoGames.Remove(item);
-
+            _context.SaveChangesAsync();
             return item;
         }
 
