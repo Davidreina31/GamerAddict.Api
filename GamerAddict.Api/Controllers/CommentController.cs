@@ -44,6 +44,7 @@ namespace GamerAddict.Api.Controllers
         [Authorize]
         public async Task<ActionResult<CommentDTO>> Post([FromBody] CommentDTO commentDTO)
         {
+            commentDTO.CommentDate = DateTime.Today;
             var result = await _manager.Add(_mapper.Map<Comment>(commentDTO));
             var mapped = _mapper.Map<CommentDTO>(result);
             return Ok(mapped);

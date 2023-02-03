@@ -46,6 +46,7 @@ namespace GamerAddict.Api.Controllers
         [Authorize]
         public async Task<ActionResult<AnswerDTO>> Post([FromBody]AnswerDTO answer)
         {
+            answer.AnswerDate = DateTime.Today;
             var result = await _manager.Add(_mapper.Map<Answer>(answer));
             var mapped = _mapper.Map<AnswerDTO>(result);
             return Ok(mapped);
