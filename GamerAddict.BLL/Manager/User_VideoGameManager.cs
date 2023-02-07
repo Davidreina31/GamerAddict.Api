@@ -16,6 +16,15 @@ namespace GamerAddict.BLL.Manager
 
         public async Task<User_VideoGame> Add(User_VideoGame ItemToAdd)
         {
+            var allForUser = await GetAll(ItemToAdd.UserId);
+
+            foreach (var item in allForUser)
+            {
+                if(item.VideoGameId == ItemToAdd.VideoGameId)
+                {
+                    throw new Exception("Video game already added to favorites.");
+                }
+            }
             return await _repo.Add(ItemToAdd);
         }
 
